@@ -4,7 +4,7 @@ import '../models/user.dart';
 class UserTile extends StatelessWidget {
   final User user;
 
-  UserTile({required this.user});
+  const UserTile({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {

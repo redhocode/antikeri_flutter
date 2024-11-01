@@ -5,6 +5,8 @@ import '../models/presensi.dart';
 import '../services/api_service.dart';
 
 class UserListScreen extends StatefulWidget {
+  const UserListScreen({super.key});
+
   @override
   _UserListScreenState createState() => _UserListScreenState();
 }
@@ -43,7 +45,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
       apiService.postPresensi(presensi).then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Presensi berhasil dikirim!')),
+          const SnackBar(content: Text('Presensi berhasil dikirim!')),
         );
       }).catchError((error) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -52,7 +54,7 @@ class _UserListScreenState extends State<UserListScreen> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Silakan lengkapi semua field!')),
+        const SnackBar(content: Text('Silakan lengkapi semua field!')),
       );
     }
   }
@@ -88,13 +90,13 @@ class _UserListScreenState extends State<UserListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User List'),
+        title: const Text('User List'),
       ),
       body: FutureBuilder<List<User>>(
         future: users,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
@@ -105,7 +107,7 @@ class _UserListScreenState extends State<UserListScreen> {
               child: Column(
                 children: [
                   DropdownButton<User>(
-                    hint: Text('Pilih User'),
+                    hint: const Text('Pilih User'),
                     value: selectedUser,
                     onChanged: (User? newValue) {
                       setState(() {
@@ -121,7 +123,7 @@ class _UserListScreenState extends State<UserListScreen> {
                   ),
                   TextField(
                     controller: checkTimeController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Check Time',
                       hintText: 'Pilih Tanggal dan Waktu',
                     ),
@@ -129,7 +131,7 @@ class _UserListScreenState extends State<UserListScreen> {
                     onTap: () => _selectDateTime(context),
                   ),
                   DropdownButton<int>(
-                    hint: Text('Pilih Sensor ID'),
+                    hint: const Text('Pilih Sensor ID'),
                     value: selectedSensorId,
                     onChanged: (int? newValue) {
                       setState(() {
@@ -145,7 +147,7 @@ class _UserListScreenState extends State<UserListScreen> {
                     }).toList(),
                   ),
                   DropdownButton<String>(
-                    hint: Text('Pilih SN'),
+                    hint: const Text('Pilih SN'),
                     value: selectedSN,
                     onChanged: (String? newValue) {
                       setState(() {
@@ -159,16 +161,16 @@ class _UserListScreenState extends State<UserListScreen> {
                       );
                     }).toList(),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: postPresensi,
-                    child: Text('Kirim Presensi'),
+                    child: const Text('Kirim Presensi'),
                   ),
                 ],
               ),
             );
           } else {
-            return Center(child: Text('No data found'));
+            return const Center(child: Text('No data found'));
           }
         },
       ),
